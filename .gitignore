@@ -1,0 +1,60 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+logs/*.log
+npm-debug.log
+yarn-debug.log
+pnpm-debug.log
+lerna-debug.log
+debug.log
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Build and output files
+dist/
+build/
+.cache/
+.vite/
+.next/
+out/
+
+# MacOS system files
+.DS_Store
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Docker files
+docker-compose.override.yml
+*.dockerfile
+
+# Database files (SingleStoreDB)
+database/*.sql
+database/dumps/
+database/backups/
+
+# Coverage reports (for testing)
+coverage/
+.nyc_output/
+jest/
+
+# Optional: Ignore package-lock.json if using Yarn or PNPM
+package-lock.json
+pnpm-lock.yaml
