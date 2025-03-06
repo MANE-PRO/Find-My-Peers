@@ -11,7 +11,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("http://localhost:3000"); // Redirect to frontend
+    res.redirect("http://localhost:3000/api/users"); // Redirect to frontend
   }
 );
 
