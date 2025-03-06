@@ -1,0 +1,51 @@
+/* Background and Centering */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c003e, #000000); /* Purple to Black Gradient */
+  }
+  
+  /* Card Styling */
+  .card {
+    background: #1a1a1a; /* Dark Black */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(128, 0, 128, 0.5); /* Purple Glow */
+    text-align: center;
+    width: 320px;
+    color: #e0b3ff; /* Soft Purple Text */
+  }
+  
+  /* Title Styling */
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #b366ff; /* Light Purple */
+    margin-bottom: 10px;
+  }
+  
+  /* Subtitle Styling */
+  .subtitle {
+    font-size: 1rem;
+    color: #d9aaff; /* Soft Purple */
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 400px) {
+    .card {
+      width: 90%; /* Adjust width for smaller screens */
+      padding: 1.5rem;
+    }
+  
+    .title {
+      font-size: 1.5rem; /* Adjust text size */
+    }
+  
+    .subtitle {
+      font-size: 0.9rem;
+    }
+  }
+  

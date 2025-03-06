@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./login.module.css";
 import { GoogleLogin } from "@react-oauth/google";
 
 const SignIn = () => {
@@ -12,9 +13,12 @@ const SignIn = () => {
   };
   console.log("Hi");
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Sign in with Google</h2>
-      <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h2 className={styles.title}>Sign In</h2>
+        <p className={styles.subtitle}>Continue with your Google Account</p>
+        <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+      </div>
     </div>
   );
 };
