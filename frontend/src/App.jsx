@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from "react";
 import SignIn from "./login/login";
+import Profile from "./home/Profile";
+import axios from "axios";
 const App = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/auth/user", {withCredentials: true})
+    .then((res) => setUser(res.data.user))
+    .catch(() => setUser(null));
+  }, []);
+
+  const logoutHandler = async () => {
+    await axios.get("http://localhost:8000/auth/logout", {withCredentials: true});
+    setUser(null);
+  }
+
   return (
     <div>
-      <SignIn />
+      {user ? <Profile logout={logoutHandler}/> : <SignIn/>}
     </div>
   );
 };

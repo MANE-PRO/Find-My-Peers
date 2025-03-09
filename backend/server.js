@@ -8,14 +8,23 @@ import postRoutes from "./routes/postRoutes.js";
 import authRoutes from "./routes/auth.js";
 import path from "path";
 import pool from "./config/db.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 
-
+//app.use(cors({ origin: "http://localhost:8000", credentials: true }));
 app.use(express.json()); // Middleware to parse JSON
 app.use(
-    session({ secret: process.env.SECRET_KEY, resave: false, saveUninitialized: true })
+    session({
+      secret: process.env.SECRET_KEY,
+      resave: false, 
+      saveUninitialized: true,
+      cookie: { 
+        maxAge: 24 * 60 * 60 * 1000,
+        secure: false //change to true during production 
+      } 
+    })
   );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -30,7 +39,7 @@ passport.use("google",
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: "http://localhost:8000/auth/google/callback",
       //userProfileURL: "https://wwww.googleapis.com/oauth2/v3/userinfo"
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -64,11 +73,17 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
-
+app.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) console.log(err);
+    req.session.destroy(); // Clears session from store
+    res.redirect("/");
+  });
+});
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"));
 });
-const PORT = 3000;
+const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
