@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignIn from "./login/login";
-import Profile from "./home/Profile";
+import Home from "./home/Home";
 import axios from "axios";
 const App = () => {
   const [user, setUser] = useState(null);
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div>
-      {user ? <Profile logout={logoutHandler}/> : <SignIn/>}
+      {user ? <Home logout={logoutHandler}/> : <SignIn/>}
     </div>
   );
 };

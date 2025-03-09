@@ -26,6 +26,7 @@ router.get("/logout", (req, res) => {
 // To get Login information
 router.get("/user", (req, res) => {
   if(!req.user) return res.status(401).json({message: "Unauthorised"});
+  console.log(req.user);
   res.json({success: true, user: req.user});
 })
 
