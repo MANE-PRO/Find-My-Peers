@@ -11,6 +11,10 @@ const App = () => {
     .catch(() => setUser(null));
   }, []);
 
+  const updateUser = (data) =>{
+    setUser(data);
+  }
+
   const logoutHandler = async () => {
     await axios.get("http://localhost:8000/auth/logout", {withCredentials: true});
     setUser(null);
@@ -18,7 +22,7 @@ const App = () => {
 
   return (
     <div>
-      {user ? <Home logout={logoutHandler}/> : <SignIn/>}
+      {user ? <Home logout={logoutHandler} user={user} modifyUser={updateUser}/> : <SignIn/>}
     </div>
   );
 };

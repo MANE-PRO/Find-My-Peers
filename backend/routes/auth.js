@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-
+import pool from "../config/db.js";
 const router = express.Router();
 
 // Route to start authentication
@@ -24,10 +24,15 @@ router.get("/logout", (req, res) => {
 });
 
 // To get Login information
-router.get("/user", (req, res) => {
+router.get("/user", async (req, res) => {
   if(!req.user) return res.status(401).json({message: "Unauthorised"});
-  console.log(req.user);
-  res.json({success: true, user: req.user});
-})
+  try {
+    const [fetchUser] = await pool.query("SELECT * FROM users where email = ? or opt_email = ?", [req.user._json.email, req.user._json.email]);
+    console.log(fetchUser[0]);
+    res.json({success: true, user: fetchUser[0]});
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 export default router;

@@ -1,12 +1,16 @@
 import React from "react";
 import styles from "./Home.module.css";
-
+import Modal from "./Modal";
+import {useState} from "react";
 const Home = (props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className={styles.container}>
       {/* Navigation Bar with Buttons */}
       <div className={styles.navbar}>
-        <button className={styles.button}>Profile</button>
+        <button onClick={() => setIsModalOpen(true)} className={styles.button}>Profile</button>
+        <Modal isOpen={isModalOpen} modifyUser={(data) => {props.modifyUser(data)}} user={props.user} onClose={() => setIsModalOpen(false)} />
         <button className={styles.button}>Reset Filters</button>
         <button className={styles.button} onClick={props.logout}>Logout</button>
       </div>

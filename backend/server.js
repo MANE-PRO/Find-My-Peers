@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth.js";
 import path from "path";
 import pool from "./config/db.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 dotenv.config();
 
 const app = express();
@@ -34,6 +35,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 const __dirname = path.resolve(); // Get current directory path
 app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
+app.use(bodyParser.urlencoded({extended: true}));
 passport.use("google", 
   new GoogleStrategy(
     {
@@ -82,6 +84,15 @@ app.get("/logout", (req, res) => {
 });
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"));
+});
+app.post("/user/save", async (req, res) => {
+  try {
+    await pool.query("UPDATE users set opt_email = ?, phone = ?, psstation = ?, pslocation = ? where email = ?", [req.body.personalEmail, req.body.phone, req.body.psStation, req.body.psLocation, req.user._json.email]);
+    const [check] = await pool.query("SELECT * FROM users where email = ?", [req.user._json.email]);
+    res.json({success: true, user: check[0]});
+  } catch (err) {
+    console.log(err);
+  }
 });
 const PORT = 8000;
 app.listen(PORT, () => {
