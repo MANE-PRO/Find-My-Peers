@@ -31,7 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // Routes
 app.use("/auth", authRoutes);
-app.use("/api/users", userRoutes);
+app.use("/users", userRoutes);
 app.use("/api/posts", postRoutes);
 const __dirname = path.resolve(); // Get current directory path
 app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));

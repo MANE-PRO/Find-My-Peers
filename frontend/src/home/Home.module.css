@@ -7,36 +7,6 @@
     color: white;
   }
   
-  /* Navigation Bar */
-  .navbar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 4%;
-    position: fixed;
-    top: 0;
-    backdrop-filter: blur(10px);
-  }
-  
-  /* Buttons inside Navbar */
-  .button {
-    background-color: #b366ff; /* Purple */
-    color: white;
-    border: none;
-    padding: 12px 3%;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
-    margin: 0 2%;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .button:hover {
-    background-color: #8a2be2; /* Darker Purple */
-    transform: scale(1.05);
-  }
-  
   /* Main Content */
   .content {
     margin-top: 20%; /* Space from navbar */
@@ -59,16 +29,9 @@
   
   /* Responsive Design */
   @media (max-width: 600px) {
-    .navbar {
-      flex-direction: column;
-      align-items: center;
-    }
+   
     .content{
       margin-top: 50%;
-    }
-    .button {
-      margin: 8px 0; /* Stack buttons on smaller screens */
-      width: 50%;
     }
   
     .title {

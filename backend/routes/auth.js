@@ -29,7 +29,6 @@ router.get("/user", async (req, res) => {
   try {
     const [fetchUser] = await pool.query("SELECT * FROM users where email = ? or opt_email = ?", [req.user._json.email, req.user._json.email]);
     const [otherUser] = await pool.query("SELECT * FROM users WHERE email NOT IN (?, ?)", [req.user._json.email, req.user._json.email]);
-    console.log(fetchUser[0]);
     res.json({success: true, user: fetchUser[0], otherUser:otherUser});
   } catch (err) {
     console.log(err);
