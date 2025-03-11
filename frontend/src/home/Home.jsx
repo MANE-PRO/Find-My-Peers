@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./Home.module.css";
 import Modal from "./Modal";
 import {useState} from "react";
+import Card from "./Card";
 const Home = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  //console.log(props.otherUser);
   return (
     <div className={styles.container}>
       {/* Navigation Bar with Buttons */}
@@ -17,8 +18,9 @@ const Home = (props) => {
 
       {/* Main Content */}
       <div className={styles.content}>
-        <h1 className={styles.title}>Welcome to Our Platform</h1>
-        <p className={styles.subtitle}>Experience seamless interaction with our services.</p>
+        {props.otherUser.map((user) => {
+          return <Card key={user.id} prof={user}/>
+        })}
       </div>
     </div>
   );

@@ -4,10 +4,13 @@ import Home from "./home/Home";
 import axios from "axios";
 const App = () => {
   const [user, setUser] = useState(null);
-
+  const [otherUser, setOtherUser] = useState(null);
   useEffect(() => {
     axios.get("http://localhost:8000/auth/user", {withCredentials: true})
-    .then((res) => setUser(res.data.user))
+    .then((res) => {
+      setUser(res.data.user);
+      setOtherUser(res.data.otherUser);
+    })
     .catch(() => setUser(null));
   }, []);
 
@@ -22,7 +25,7 @@ const App = () => {
 
   return (
     <div>
-      {user ? <Home logout={logoutHandler} user={user} modifyUser={updateUser}/> : <SignIn/>}
+      {user ? <Home logout={logoutHandler} user={user} otherUser={otherUser} modifyUser={updateUser}/> : <SignIn/>}
     </div>
   );
 };
