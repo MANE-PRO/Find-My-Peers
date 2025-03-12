@@ -4,7 +4,6 @@ import styles from "./Modal.module.css";
 import axios from "axios";
 import {useRef} from "react";
 const Modal = ({ isOpen, onClose, user, modifyUser }) => {
-  const persRef = useRef();
   const phoneRef = useRef();
   const psStRef = useRef();
   const psLocRef = useRef();
@@ -14,13 +13,12 @@ const Modal = ({ isOpen, onClose, user, modifyUser }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formData = {
-      personalEmail: persRef.current.value,
       phone: phoneRef.current.value,
       psStation: psStRef.current.value,
       psLocation: psLocRef.current.value
     }
     try{
-      const response = await axios.post("http://localhost:8000/user/save", formData);
+      const response = await axios.post("http://localhost:8000/users/save", formData);
       modifyUser(response.data.user);
     }catch(error){
       console.log(error);
@@ -44,11 +42,8 @@ const Modal = ({ isOpen, onClose, user, modifyUser }) => {
           <label>Name:</label>
           <input type="text" value={user.name} readOnly />
 
-          <label>BITS Email:</label>
+          <label>Email:</label>
           <input type="email" value={user.email} readOnly />
-
-          <label>Personal Email:</label>
-          <input type="email" placeholder="Enter your personal email" ref={persRef} defaultValue={user.opt_email}/>
 
           <label>Phone:</label>
           <input type="tel" placeholder="Enter your phone number" ref={phoneRef} defaultValue={user.phone}/>

@@ -5,50 +5,23 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({extended: true}));
 // Get all users
 router.get("/", async (req, res) => {
+  if(!req.user) return res.status(401).json({message: "Unauthorised"});
   try {
-    const [users] = await pool.query("SELECT * FROM users");
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Create a new user
-router.post("/request", async (req, res) => {
-  const { email } = req.body;
-  try {
-    const [fetch] = await pool.query(
-      "SELECT * FROM requests WHERE email1 = ? AND email2 = ?",
-      [req.user._json.email, email]
-    );
-    if(fetch.length === 0){
-      const [result] = await pool.query(
-        "INSERT INTO requests (email1, email2) VALUES (?, ?)",
-        [req.user._json.email, email]
-      );
-      res.status(201).json({ message: "inserted" });
-    }
-    else{
-      res.status(201).json({message: "already exists"});
-    }
+    const [fetchUser] = await pool.query("SELECT * FROM users where email = ?", [req.user._json.email]);
+    const [otherUser] = await pool.query("SELECT * FROM users WHERE email NOT IN (?, ?)", [req.user._json.email, req.user._json.email]);
+    res.json({success: true, user: fetchUser[0], otherUser:otherUser});
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: err.message });
   }
 });
 
-router.get("/request", async (req, res) => {
+router.post("/save", async (req, res) => {
   try {
-    const [fetch] = await pool.query(
-      "SELECT * FROM users WHERE email IN (SELECT email2 FROM requests where email1 = ?)",
-      [req.user._json.email]
-    );
-    res.json({users: fetch});
+    await pool.query("UPDATE users set phone = ?, psstation = ?, pslocation = ? where email = ?", [req.body.phone, req.body.psStation, req.body.psLocation, req.user._json.email]);
+    const [check] = await pool.query("SELECT * FROM users where email = ?", [req.user._json.email]);
+    res.json({success: true, user: check[0]});
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: err.message });
   }
 });
-
-
 export default router;
