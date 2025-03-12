@@ -6,7 +6,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [otherUser, setOtherUser] = useState(null);
   useEffect(() => {
-    axios.get("http://localhost:8000/auth/user", {withCredentials: true})
+    axios.get("http://localhost:8000/users", {withCredentials: true})
     .then((res) => {
       setUser(res.data.user);
       setOtherUser(res.data.otherUser);

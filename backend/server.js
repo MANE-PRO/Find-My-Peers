@@ -4,11 +4,9 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import session from "express-session";
 import userRoutes from "./routes/userRoutes.js";
-import postRoutes from "./routes/postRoutes.js";
 import authRoutes from "./routes/auth.js";
 import path from "path";
 import pool from "./config/db.js";
-import cors from "cors";
 import bodyParser from "body-parser";
 dotenv.config();
 
@@ -32,7 +30,6 @@ app.use(passport.session());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/api/posts", postRoutes);
 const __dirname = path.resolve(); // Get current directory path
 app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -85,15 +82,7 @@ app.get("/logout", (req, res) => {
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"));
 });
-app.post("/user/save", async (req, res) => {
-  try {
-    await pool.query("UPDATE users set opt_email = ?, phone = ?, psstation = ?, pslocation = ? where email = ?", [req.body.personalEmail, req.body.phone, req.body.psStation, req.body.psLocation, req.user._json.email]);
-    const [check] = await pool.query("SELECT * FROM users where email = ?", [req.user._json.email]);
-    res.json({success: true, user: check[0]});
-  } catch (err) {
-    console.log(err);
-  }
-});
+
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
