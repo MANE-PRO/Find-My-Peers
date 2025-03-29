@@ -14,12 +14,17 @@
 
 .err{
   display: block;
-  margin-top: 15%;
+  margin-top: 0%;
+}
+
+.filter{
+  display: block;
+  margin-top: 10%;
 }
 
   /* Main Content */
   .content {
-    margin-top: 5%; /* Space from navbar */
+    margin-top: 0%; /* Space from navbar */
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -39,9 +44,15 @@
   
   /* Responsive Design */
   @media (max-width: 600px) {
-   
+    .filter {
+      margin-top: 40%;
+    }
+    .err{
+      display: block;
+      margin-top: 3%;
+    }
     .content{
-      margin-top: 50%;
+      margin-top: 3%;
     }
   
     .title {
@@ -52,4 +63,3 @@
       font-size: 1rem;
     }
   }
-  
