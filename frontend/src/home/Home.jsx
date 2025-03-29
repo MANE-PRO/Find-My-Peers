@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import {useState} from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
+import ErrorMessage from "./ErrorMessage";
 const Home = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   //console.log(props.otherUser);
@@ -14,7 +15,12 @@ const Home = (props) => {
     <div className={styles.container}>
       {/* Navigation Bar with Buttons */}
       <Modal isOpen={isModalOpen} modifyUser={(data) => {props.modifyUser(data)}} user={props.user} onClose={() => setIsModalOpen(false)} />
+      <div className={styles.nav}>
       <Navbar logout={props.logout} modalon={handleModal} />
+      </div>
+      <div className={styles.err}>
+      {(props.user.phone === "" || props.user.psstation === "" || props.user.pslocation === "") ? <ErrorMessage message="Incomplete Profile!" />: undefined}
+      </div>
       {/* Main Content */}
       <div className={styles.content}>
         {props.otherUser.map((user) => {
