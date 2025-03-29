@@ -50,7 +50,7 @@ passport.use("google",
         //console.log(check);
         if(check.length === 0){
           const [result] = await pool.query(
-            "INSERT INTO users (name, email) VALUES (?, ?)",
+            "INSERT INTO users (name, email, phone, psstation, pslocation) VALUES (?, ?, '', '', '')",
             [name, email]
           );
         }

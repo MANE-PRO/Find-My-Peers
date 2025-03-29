@@ -13,6 +13,7 @@ const Modal = ({ isOpen, onClose, user, modifyUser }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formData = {
+      email: user.email,
       phone: phoneRef.current.value,
       psStation: psStRef.current.value,
       psLocation: psLocRef.current.value

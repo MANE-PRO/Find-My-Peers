@@ -1,15 +1,30 @@
 /* Full Page Background */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
     /*background: linear-gradient(135deg, #2c003e, #000000);  Purple to Black Gradient */
     color: white;
+    margin: 0px;
+    padding: 0px;
   }
-  
+
+.nav{
+  display: flex;
+  margin: 0px;
+}
+
+.err{
+  display: block;
+  margin-top: 0%;
+}
+
+.filter{
+  display: block;
+  margin-top: 10%;
+}
+
   /* Main Content */
   .content {
-    margin-top: 20%; /* Space from navbar */
+    margin-top: 0%; /* Space from navbar */
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -29,9 +44,15 @@
   
   /* Responsive Design */
   @media (max-width: 600px) {
-   
+    .filter {
+      margin-top: 40%;
+    }
+    .err{
+      display: block;
+      margin-top: 3%;
+    }
     .content{
-      margin-top: 50%;
+      margin-top: 3%;
     }
   
     .title {
@@ -42,4 +63,3 @@
       font-size: 1rem;
     }
   }
-  

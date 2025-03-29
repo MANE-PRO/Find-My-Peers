@@ -1,0 +1,38 @@
+.error-container {
+    background: rgba(255, 0, 0, 0.2); /* Light red background for visibility */
+    color: white; /* White text for contrast */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px auto;
+    padding-right: 8px;
+    padding-left: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+  }
+  
+  .error-text {
+    flex: 1;
+  }
+  
+  .error-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 4px;
+    margin-right: 0px;
+  }
+  
+  .error-close:hover {
+    color: #ffaaaa; /* Lighter red on hover */
+  }
+  
