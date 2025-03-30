@@ -1,6 +1,6 @@
 To run the repository:
 
-git clone https://github.com/MANE-PRO/Appreciation.git
+git clone https://github.com/MANE-PRO/Find-My-Peers.git
 
 CREATE A .env file in backend directory with following info
 
